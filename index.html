@@ -1077,9 +1077,9 @@
             const images = document.querySelectorAll('.content-image');
             images.forEach((img, index) => {
                 img.onerror = () => {
-                    console.error(Failed to load image: ${img.src});
+                    console.error(`Failed to load image: ${img.src}`);
                     img.src = placeholderImage;
-                    img.alt = Momo Placeholder ${index + 1};
+                    img.alt = `Momo Placeholder ${index + 1}`;
                 };
             });
             console.log('Image error handlers set up.');
@@ -1097,7 +1097,7 @@
                     entries.forEach((entry) => {
                         if (entry.isIntersecting && !entry.target.classList.contains('visible')) {
                             entry.target.classList.add('visible');
-                            console.log(Item ${entry.target.textContent.slice(0, 20)}... is now visible.);
+                            console.log(`Item ${entry.target.textContent.slice(0, 20)}... is now visible.`);
                         }
                     });
                 },
