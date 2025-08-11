@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Momo cart Experience</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         /* Reset and Global Styles */
         * {
@@ -28,7 +28,7 @@
             justify-content: center;
             align-items: center;
             width: 100%;
-            min-height: auto;
+            min-height: 100vh;
             position: relative;
             overflow: hidden;
             font-family: 'Segoe UI', 'Arial Black', sans-serif;
@@ -525,6 +525,27 @@
             }
         }
 
+        /* Confetti Button Styles */
+        #confettiBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ff4466;
+            border: none;
+            padding: 12px 18px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: white;
+            box-shadow: 0 4px 8px rgba(255, 68, 102, 0.5);
+            transition: background 0.3s ease;
+            z-index: 1000;
+        }
+
+        #confettiBtn:hover {
+            background: #ff6384;
+        }
+
         @media (max-width: 600px) {
             .glow-text {
                 font-size: 3rem;
@@ -580,6 +601,11 @@
                 width: 100px;
                 height: 100px;
             }
+
+            #confettiBtn {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
         }
 
         /* Momos efffect Location Styles */
@@ -587,7 +613,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: auto;
+            min-height: 100vh;
             position: relative;
             background: #000000;
             font-family: 'Montserrat', sans-serif;
@@ -840,7 +866,7 @@
 
         /* Message Section Styles */
         .message-section {
-            min-height: auto;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -972,6 +998,9 @@
 </head>
 
 <body>
+    <!-- Confetti Button -->
+    <button id="confettiBtn">Celebrate 🎉</button>
+
     <!-- Grand Opening Section -->
     <div class="grand-opening-section" id="grandOpening">
         <div class="balloons">
@@ -1070,6 +1099,81 @@
     <!-- Particle Background for Location Section -->
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script>
+        // Confetti Effects
+        function basicBurst() {
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+        }
+
+        function fountainEffect() {
+            const duration = 3 * 1000;
+            const animationEnd = Date.now() + duration;
+            const interval = setInterval(() => {
+                confetti({ particleCount: 5, angle: 90, spread: 55, origin: { x: 0.5, y: 1 } });
+                if (Date.now() > animationEnd) clearInterval(interval);
+            }, 250);
+        }
+
+        function colorfulConfetti() {
+            confetti({ particleCount: 150, spread: 100, colors: ['#bb0000', '#ffffff', '#0000bb', '#00bb00', '#bbbb00'] });
+        }
+
+        function fireworks() {
+            confetti({ particleCount: 200, spread: 360, startVelocity: 30, decay: 0.9, gravity: 1, scalar: 1.2 });
+        }
+
+        function leftToRight() {
+            confetti({ particleCount: 100, angle: 60, spread: 55, origin: { x: 0 } });
+        }
+
+        function rightToLeft() {
+            confetti({ particleCount: 100, angle: 120, spread: 55, origin: { x: 1 } });
+        }
+
+        function smallBurst() {
+            confetti({ particleCount: 30, spread: 180, origin: { y: 0.7 } });
+        }
+
+        function slowFall() {
+            confetti({ particleCount: 100, spread: 70, gravity: 0.3, scalar: 0.8 });
+        }
+
+        function circleShapes() {
+            confetti({ particleCount: 100, shapes: ['circle'], spread: 90 });
+        }
+
+        function doubleBurst() {
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+            setTimeout(() => {
+                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+            }, 400);
+        }
+
+        const effects = [
+            basicBurst,
+            fountainEffect,
+            colorfulConfetti,
+            fireworks,
+            leftToRight,
+            rightToLeft,
+            smallBurst,
+            slowFall,
+            circleShapes,
+            doubleBurst
+        ];
+
+        document.getElementById('confettiBtn').addEventListener('click', () => {
+            effects.forEach((effect, i) => {
+                setTimeout(effect, i * 500);
+            });
+        });
+
+        window.onload = () => {
+            effects.forEach((effect, i) => {
+                setTimeout(effect, i * 500);
+            });
+        };
+
+        // Existing Scripts
         const placeholderImage = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACoCAMAAABt9SM9AAAAA1BMVEVNTU2fM9YhAAAARklEQVR4nO3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIABLsAAM4E9zYAAAAASUVORK5CYII=';
 
         function handleImageErrors() {
